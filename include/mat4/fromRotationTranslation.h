@@ -1,4 +1,8 @@
-module.exports = fromRotationTranslation;
+#ifndef __mat4_fromRotationTranslation__
+#define __mat4_fromRotationTranslation__
+
+#include "type.h"
+
 
 /**
  * Creates a matrix from a quaternion rotation and vector translation
@@ -6,7 +10,7 @@ module.exports = fromRotationTranslation;
  *
  *     mat4.identity(dest);
  *     mat4.translate(dest, vec);
- *     var quatMat = mat4.create();
+ *     float quatMat = mat4.create();
  *     quat4.toMat4(quat, quatMat);
  *     mat4.multiply(dest, quatMat);
  *
@@ -15,9 +19,9 @@ module.exports = fromRotationTranslation;
  * @param {vec3} v Translation vector
  * @returns {mat4} out
  */
-function fromRotationTranslation(out, q, v) {
+mat4 mat4_fromRotationTranslation(mat4 out, float q[4], float v[3]) {
     // Quaternion math
-    var x = q[0], y = q[1], z = q[2], w = q[3],
+    float x = q[0], y = q[1], z = q[2], w = q[3],
         x2 = x + x,
         y2 = y + y,
         z2 = z + z,
@@ -48,6 +52,8 @@ function fromRotationTranslation(out, q, v) {
     out[13] = v[1];
     out[14] = v[2];
     out[15] = 1;
-    
+
     return out;
 };
+
+#endif

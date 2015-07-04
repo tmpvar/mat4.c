@@ -1,4 +1,8 @@
-module.exports = fromQuat;
+#ifndef __mat4_fromQuat__
+#define __mat4_fromQuat__
+
+#include "type.h"
+
 
 /**
  * Creates a matrix from a quaternion rotation.
@@ -7,8 +11,8 @@ module.exports = fromQuat;
  * @param {quat4} q Rotation quaternion
  * @returns {mat4} out
  */
-function fromQuat(out, q) {
-    var x = q[0], y = q[1], z = q[2], w = q[3],
+mat4 mat4_fromQuat(mat4 out, float q[4]) {
+    float x = q[0], y = q[1], z = q[2], w = q[3],
         x2 = x + x,
         y2 = y + y,
         z2 = z + z,
@@ -45,3 +49,5 @@ function fromQuat(out, q) {
 
     return out;
 };
+
+#endif

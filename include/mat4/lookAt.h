@@ -1,6 +1,9 @@
-var identity = require('./identity');
+#ifndef __mat4_lookAt__
+#define __mat4_lookAt__
 
-module.exports = lookAt;
+#include "type.h"
+#include "identity.h"
+#include <math.h>
 
 /**
  * Generates a look-at matrix with the given eye position, focal point, and up axis
@@ -11,8 +14,8 @@ module.exports = lookAt;
  * @param {vec3} up vec3 pointing up
  * @returns {mat4} out
  */
-function lookAt(out, eye, center, up) {
-    var x0, x1, x2, y0, y1, y2, z0, z1, z2, len,
+mat4 mat4_lookAtf(mat4 out, float eye[3], float center[3], float up[3]) {
+    float x0, x1, x2, y0, y1, y2, z0, z1, z2, len,
         eyex = eye[0],
         eyey = eye[1],
         eyez = eye[2],
@@ -23,17 +26,17 @@ function lookAt(out, eye, center, up) {
         centery = center[1],
         centerz = center[2];
 
-    if (Math.abs(eyex - centerx) < 0.000001 &&
-        Math.abs(eyey - centery) < 0.000001 &&
-        Math.abs(eyez - centerz) < 0.000001) {
-        return identity(out);
+    if (fabs(eyex - centerx) < 0.000001 &&
+        fabs(eyey - centery) < 0.000001 &&
+        fabs(eyez - centerz) < 0.000001) {
+        return mat4_identity(out);
     }
 
     z0 = eyex - centerx;
     z1 = eyey - centery;
     z2 = eyez - centerz;
 
-    len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
+    len = 1 / sqrtf(z0 * z0 + z1 * z1 + z2 * z2);
     z0 *= len;
     z1 *= len;
     z2 *= len;
@@ -41,7 +44,7 @@ function lookAt(out, eye, center, up) {
     x0 = upy * z2 - upz * z1;
     x1 = upz * z0 - upx * z2;
     x2 = upx * z1 - upy * z0;
-    len = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
+    len = sqrt(x0 * x0 + x1 * x1 + x2 * x2);
     if (!len) {
         x0 = 0;
         x1 = 0;
@@ -57,7 +60,7 @@ function lookAt(out, eye, center, up) {
     y1 = z2 * x0 - z0 * x2;
     y2 = z0 * x1 - z1 * x0;
 
-    len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
+    len = sqrt(y0 * y0 + y1 * y1 + y2 * y2);
     if (!len) {
         y0 = 0;
         y1 = 0;
@@ -88,3 +91,5 @@ function lookAt(out, eye, center, up) {
 
     return out;
 };
+
+#endif

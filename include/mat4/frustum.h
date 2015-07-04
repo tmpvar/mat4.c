@@ -1,4 +1,8 @@
-module.exports = frustum;
+#ifndef __mat4_frustum__
+#define __mat4_frustum__
+
+#include "type.h"
+
 
 /**
  * Generates a frustum matrix with the given bounds
@@ -12,8 +16,8 @@ module.exports = frustum;
  * @param {Number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function frustum(out, left, right, bottom, top, near, far) {
-    var rl = 1 / (right - left),
+mat4 mat4_frustum(mat4 out, float left, float right, float bottom, float top, float near, float far) {
+    float rl = 1 / (right - left),
         tb = 1 / (top - bottom),
         nf = 1 / (near - far);
     out[0] = (near * 2) * rl;
@@ -34,3 +38,5 @@ function frustum(out, left, right, bottom, top, near, far) {
     out[15] = 0;
     return out;
 };
+
+#endif

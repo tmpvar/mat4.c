@@ -1,4 +1,8 @@
-module.exports = transpose;
+#ifndef __mat4_transpose__
+#define __mat4_transpose__
+
+#include "type.h"
+
 
 /**
  * Transpose the values of a mat4
@@ -7,10 +11,10 @@ module.exports = transpose;
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-function transpose(out, a) {
+mat4 mat4_transpose(mat4 out, mat4 a) {
     // If we are transposing ourselves we can skip a few steps but have to cache some values
-    if (out === a) {
-        var a01 = a[1], a02 = a[2], a03 = a[3],
+    if (out == a) {
+        float a01 = a[1], a02 = a[2], a03 = a[3],
             a12 = a[6], a13 = a[7],
             a23 = a[11];
 
@@ -44,6 +48,8 @@ function transpose(out, a) {
         out[14] = a[11];
         out[15] = a[15];
     }
-    
+
     return out;
 };
+
+#endif

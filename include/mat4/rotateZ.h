@@ -1,4 +1,8 @@
-module.exports = rotateZ;
+#ifndef __mat4_rotateZ__
+#define __mat4_rotateZ__
+
+#include "type.h"
+#include <math.h>
 
 /**
  * Rotates a matrix by the given angle around the Z axis
@@ -8,9 +12,9 @@ module.exports = rotateZ;
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function rotateZ(out, a, rad) {
-    var s = Math.sin(rad),
-        c = Math.cos(rad),
+mat4 mat4_rotateZ(mat4 out, mat4 a, float rad) {
+    float s = sinf(rad),
+        c = cosf(rad),
         a00 = a[0],
         a01 = a[1],
         a02 = a[2],
@@ -20,7 +24,7 @@ function rotateZ(out, a, rad) {
         a12 = a[6],
         a13 = a[7];
 
-    if (a !== out) { // If the source and destination differ, copy the unchanged last row
+    if (a != out) { // If the source and destination differ, copy the unchanged last row
         out[8]  = a[8];
         out[9]  = a[9];
         out[10] = a[10];
@@ -42,3 +46,5 @@ function rotateZ(out, a, rad) {
     out[7] = a13 * c - a03 * s;
     return out;
 };
+
+#endif

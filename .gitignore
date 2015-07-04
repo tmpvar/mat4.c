@@ -4,3 +4,4 @@ node_modules
 bundle.js
 tools/original.js
 README.stub.md
+test/a.out

@@ -1,13 +1,18 @@
-module.exports = copy;
+#ifndef __mat4_clone__
+#define __mat4_clone__
+
+#include "type.h"
+#include "create.h"
+
 
 /**
- * Copy the values from one mat4 to another
+ * Creates a new mat4 initialized with values from an existing matrix
  *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the source matrix
- * @returns {mat4} out
+ * @param {mat4} a matrix to clone
+ * @returns {mat4} a new 4x4 matrix
  */
-function copy(out, a) {
+mat4 mat4_clone(mat4 a) {
+    mat4 out = mat4_create();
     out[0] = a[0];
     out[1] = a[1];
     out[2] = a[2];
@@ -26,3 +31,5 @@ function copy(out, a) {
     out[15] = a[15];
     return out;
 };
+
+#endif

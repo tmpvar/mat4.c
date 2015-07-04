@@ -1,4 +1,8 @@
-module.exports = rotate;
+#ifndef __mat4_rotate__
+#define __mat4_rotate__
+
+#include "type.h"
+#include <math.h>
 
 /**
  * Rotates a mat4 by the given angle
@@ -9,9 +13,9 @@ module.exports = rotate;
  * @param {vec3} axis the axis to rotate around
  * @returns {mat4} out
  */
-function rotate(out, a, rad, axis) {
-    var x = axis[0], y = axis[1], z = axis[2],
-        len = Math.sqrt(x * x + y * y + z * z),
+mat4 mat4_rotate(mat4 out, mat4 a, float rad, float axis[3]) {
+    float x = axis[0], y = axis[1], z = axis[2],
+        len = sqrt(x * x + y * y + z * z),
         s, c, t,
         a00, a01, a02, a03,
         a10, a11, a12, a13,
@@ -20,15 +24,15 @@ function rotate(out, a, rad, axis) {
         b10, b11, b12,
         b20, b21, b22;
 
-    if (Math.abs(len) < 0.000001) { return null; }
-    
+    if (fabs(len) < 0.000001) { return 0; }
+
     len = 1 / len;
     x *= len;
     y *= len;
     z *= len;
 
-    s = Math.sin(rad);
-    c = Math.cos(rad);
+    s = sinf(rad);
+    c = cosf(rad);
     t = 1 - c;
 
     a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
@@ -54,7 +58,7 @@ function rotate(out, a, rad, axis) {
     out[10] = a02 * b20 + a12 * b21 + a22 * b22;
     out[11] = a03 * b20 + a13 * b21 + a23 * b22;
 
-    if (a !== out) { // If the source and destination differ, copy the unchanged last row
+    if (a != out) { // If the source and destination differ, copy the unchanged last row
         out[12] = a[12];
         out[13] = a[13];
         out[14] = a[14];
@@ -62,3 +66,5 @@ function rotate(out, a, rad, axis) {
     }
     return out;
 };
+
+#endif

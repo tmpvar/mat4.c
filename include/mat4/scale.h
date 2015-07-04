@@ -1,4 +1,8 @@
-module.exports = scale;
+#ifndef __mat4_scale__
+#define __mat4_scale__
+
+#include "type.h"
+
 
 /**
  * Scales the mat4 by the dimensions in the given vec3
@@ -8,8 +12,8 @@ module.exports = scale;
  * @param {vec3} v the vec3 to scale the matrix by
  * @returns {mat4} out
  **/
-function scale(out, a, v) {
-    var x = v[0], y = v[1], z = v[2];
+mat4 mat4_scale(mat4 out, mat4 a, float v[3]) {
+    float x = v[0], y = v[1], z = v[2];
 
     out[0] = a[0] * x;
     out[1] = a[1] * x;
@@ -29,3 +33,5 @@ function scale(out, a, v) {
     out[15] = a[15];
     return out;
 };
+
+#endif

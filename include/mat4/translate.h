@@ -1,4 +1,8 @@
-module.exports = translate;
+#ifndef __mat4_translate__
+#define __mat4_translate__
+
+#include "type.h"
+
 
 /**
  * Translate a mat4 by the given vector
@@ -8,13 +12,13 @@ module.exports = translate;
  * @param {vec3} v vector to translate by
  * @returns {mat4} out
  */
-function translate(out, a, v) {
-    var x = v[0], y = v[1], z = v[2],
+mat4 mat4_translate(mat4 out, mat4 a, float v[3]) {
+    float x = v[0], y = v[1], z = v[2],
         a00, a01, a02, a03,
         a10, a11, a12, a13,
         a20, a21, a22, a23;
 
-    if (a === out) {
+    if (a == out) {
         out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
         out[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
         out[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
@@ -36,3 +40,5 @@ function translate(out, a, v) {
 
     return out;
 };
+
+#endif

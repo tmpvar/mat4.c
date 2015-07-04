@@ -1,4 +1,8 @@
-module.exports = invert;
+#ifndef __mat4_invert__
+#define __mat4_invert__
+
+#include "type.h"
+
 
 /**
  * Inverts a mat4
@@ -7,8 +11,8 @@ module.exports = invert;
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-function invert(out, a) {
-    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+mat4 mat4_invert(mat4 out, mat4 a) {
+    float a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
         a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
         a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
         a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
@@ -29,8 +33,8 @@ function invert(out, a) {
         // Calculate the determinant
         det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
 
-    if (!det) { 
-        return null; 
+    if (!det) {
+        return 0;
     }
     det = 1.0 / det;
 
@@ -53,3 +57,5 @@ function invert(out, a) {
 
     return out;
 };
+
+#endif

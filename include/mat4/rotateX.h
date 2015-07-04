@@ -1,4 +1,8 @@
-module.exports = rotateX;
+#ifndef __mat4_rotateX__
+#define __mat4_rotateX__
+
+#include "type.h"
+#include <math.h>
 
 /**
  * Rotates a matrix by the given angle around the X axis
@@ -8,9 +12,9 @@ module.exports = rotateX;
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function rotateX(out, a, rad) {
-    var s = Math.sin(rad),
-        c = Math.cos(rad),
+mat4 mat4_rotateX(mat4 out, mat4 a, float rad) {
+    float s = sinf(rad),
+        c = cosf(rad),
         a10 = a[4],
         a11 = a[5],
         a12 = a[6],
@@ -20,7 +24,7 @@ function rotateX(out, a, rad) {
         a22 = a[10],
         a23 = a[11];
 
-    if (a !== out) { // If the source and destination differ, copy the unchanged rows
+    if (a != out) { // If the source and destination differ, copy the unchanged rows
         out[0]  = a[0];
         out[1]  = a[1];
         out[2]  = a[2];
@@ -42,3 +46,5 @@ function rotateX(out, a, rad) {
     out[11] = a23 * c - a13 * s;
     return out;
 };
+
+#endif

@@ -1,4 +1,8 @@
-module.exports = rotateY;
+#ifndef __mat4_rotateY__
+#define __mat4_rotateY__
+
+#include "type.h"
+#include <math.h>
 
 /**
  * Rotates a matrix by the given angle around the Y axis
@@ -8,9 +12,9 @@ module.exports = rotateY;
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function rotateY(out, a, rad) {
-    var s = Math.sin(rad),
-        c = Math.cos(rad),
+mat4 mat4_rotateY(mat4 out, mat4 a, float rad) {
+    float s = sinf(rad),
+        c = cosf(rad),
         a00 = a[0],
         a01 = a[1],
         a02 = a[2],
@@ -20,7 +24,7 @@ function rotateY(out, a, rad) {
         a22 = a[10],
         a23 = a[11];
 
-    if (a !== out) { // If the source and destination differ, copy the unchanged rows
+    if (a != out) { // If the source and destination differ, copy the unchanged rows
         out[4]  = a[4];
         out[5]  = a[5];
         out[6]  = a[6];
@@ -42,3 +46,5 @@ function rotateY(out, a, rad) {
     out[11] = a03 * s + a23 * c;
     return out;
 };
+
+#endif

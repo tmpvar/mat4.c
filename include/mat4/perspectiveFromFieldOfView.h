@@ -1,4 +1,8 @@
-module.exports = perspectiveFromFieldOfView;
+#ifndef __mat4_perspectiveFromFieldOfView__
+#define __mat4_perspectiveFromFieldOfView__
+
+#include "type.h"
+#include <math.h>
 
 /**
  * Generates a perspective projection matrix with the given field of view.
@@ -6,16 +10,16 @@ module.exports = perspectiveFromFieldOfView;
  * with the still experiemental WebVR API.
  *
  * @param {mat4} out mat4 frustum matrix will be written into
- * @param {number} fov Object containing the following values: upDegrees, downDegrees, leftDegrees, rightDegrees
+ * @param {number} fov Object containing the following values: upDegrees (0), downDegrees (1), leftDegrees (2), rightDegrees (3)
  * @param {number} near Near bound of the frustum
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function perspectiveFromFieldOfView(out, fov, near, far) {
-    var upTan = Math.tan(fov.upDegrees * Math.PI/180.0),
-        downTan = Math.tan(fov.downDegrees * Math.PI/180.0),
-        leftTan = Math.tan(fov.leftDegrees * Math.PI/180.0),
-        rightTan = Math.tan(fov.rightDegrees * Math.PI/180.0),
+mat4 mat4_perspectiveFromFieldOfView(mat4 out, float fov[4], float near, float far) {
+    float upTan = tanf(fov[0] * M_PI/180.0),
+        downTan = tanf(fov[1] * M_PI/180.0),
+        leftTan = tanf(fov[2] * M_PI/180.0),
+        rightTan = tanf(fov[3] * M_PI/180.0),
         xScale = 2.0 / (leftTan + rightTan),
         yScale = 2.0 / (upTan + downTan);
 
@@ -38,3 +42,4 @@ function perspectiveFromFieldOfView(out, fov, near, far) {
     return out;
 }
 
+#endif

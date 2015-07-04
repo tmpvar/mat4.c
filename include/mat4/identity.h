@@ -1,4 +1,8 @@
-module.exports = identity;
+#ifndef __mat4_identity__
+#define __mat4_identity__
+
+#include "type.h"
+
 
 /**
  * Set a mat4 to the identity matrix
@@ -6,7 +10,7 @@ module.exports = identity;
  * @param {mat4} out the receiving matrix
  * @returns {mat4} out
  */
-function identity(out) {
+mat4 mat4_identity(mat4 out) {
     out[0] = 1;
     out[1] = 0;
     out[2] = 0;
@@ -25,3 +29,5 @@ function identity(out) {
     out[15] = 1;
     return out;
 };
+
+#endif

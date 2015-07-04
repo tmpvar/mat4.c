@@ -1,4 +1,8 @@
-module.exports = ortho;
+#ifndef __mat4_ortho__
+#define __mat4_ortho__
+
+#include "type.h"
+
 
 /**
  * Generates a orthogonal projection matrix with the given bounds
@@ -12,8 +16,8 @@ module.exports = ortho;
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function ortho(out, left, right, bottom, top, near, far) {
-    var lr = 1 / (left - right),
+mat4 mat4_ortho(mat4 out, float left, float right, float bottom, float top, float near, float far) {
+    float lr = 1 / (left - right),
         bt = 1 / (bottom - top),
         nf = 1 / (near - far);
     out[0] = -2 * lr;
@@ -34,3 +38,5 @@ function ortho(out, left, right, bottom, top, near, far) {
     out[15] = 1;
     return out;
 };
+
+#endif

@@ -1,4 +1,8 @@
-module.exports = perspective;
+#ifndef __mat4_perspective__
+#define __mat4_perspective__
+
+#include "type.h"
+#include <math.h>
 
 /**
  * Generates a perspective projection matrix with the given bounds
@@ -10,8 +14,8 @@ module.exports = perspective;
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function perspective(out, fovy, aspect, near, far) {
-    var f = 1.0 / Math.tan(fovy / 2),
+mat4 mat4_perspective(mat4 out, float fovy, float aspect, float near, float far) {
+    float f = 1.0 / tanf(fovy / 2),
         nf = 1 / (near - far);
     out[0] = f / aspect;
     out[1] = 0;
@@ -31,3 +35,5 @@ function perspective(out, fovy, aspect, near, far) {
     out[15] = 0;
     return out;
 };
+
+#endif

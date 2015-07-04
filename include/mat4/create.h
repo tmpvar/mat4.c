@@ -1,12 +1,16 @@
-module.exports = create;
+#ifndef __mat4_create__
+#define __mat4_create__
+
+#include "type.h"
+#include <stdlib.h>
 
 /**
  * Creates a new identity mat4
  *
  * @returns {mat4} a new 4x4 matrix
  */
-function create() {
-    var out = new Float32Array(16);
+mat4 mat4_create() {
+    mat4 out = malloc(sizeof(mat4));
     out[0] = 1;
     out[1] = 0;
     out[2] = 0;
@@ -25,3 +29,5 @@ function create() {
     out[15] = 1;
     return out;
 };
+
+#endif

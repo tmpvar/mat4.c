@@ -1,13 +1,17 @@
-module.exports = clone;
+#ifndef __mat4_copy__
+#define __mat4_copy__
+
+#include "type.h"
+
 
 /**
- * Creates a new mat4 initialized with values from an existing matrix
+ * Copy the values from one mat4 to another
  *
- * @param {mat4} a matrix to clone
- * @returns {mat4} a new 4x4 matrix
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the source matrix
+ * @returns {mat4} out
  */
-function clone(a) {
-    var out = new Float32Array(16);
+mat4 mat4_copy(mat4 out, mat4 a) {
     out[0] = a[0];
     out[1] = a[1];
     out[2] = a[2];
@@ -26,3 +30,5 @@ function clone(a) {
     out[15] = a[15];
     return out;
 };
+
+#endif

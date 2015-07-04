@@ -1,4 +1,8 @@
-module.exports = adjoint;
+#ifndef __mat4_adjoint__
+#define __mat4_adjoint__
+
+#include "type.h"
+
 
 /**
  * Calculates the adjugate of a mat4
@@ -7,8 +11,8 @@ module.exports = adjoint;
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-function adjoint(out, a) {
-    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+mat4 mat4_adjoint(mat4 out, mat4 a) {
+    float a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
         a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
         a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
         a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
@@ -31,3 +35,5 @@ function adjoint(out, a) {
     out[15] =  (a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11));
     return out;
 };
+
+#endif

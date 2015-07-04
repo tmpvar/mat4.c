@@ -1,4 +1,8 @@
-module.exports = multiply;
+#ifndef __mat4_multiply__
+#define __mat4_multiply__
+
+#include "type.h"
+
 
 /**
  * Multiplies two mat4's
@@ -8,14 +12,14 @@ module.exports = multiply;
  * @param {mat4} b the second operand
  * @returns {mat4} out
  */
-function multiply(out, a, b) {
-    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+mat4 mat4_multiply(mat4 out, mat4 a, mat4 b) {
+    float a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
         a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
         a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
         a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
 
     // Cache only the current line of the second matrix
-    var b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];  
+    float b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
     out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
     out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
     out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
@@ -40,3 +44,5 @@ function multiply(out, a, b) {
     out[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
     return out;
 };
+
+#endif
