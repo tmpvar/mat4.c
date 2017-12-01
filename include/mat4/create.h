@@ -10,7 +10,7 @@
  * @returns {mat4} a new 4x4 matrix
  */
 mat4 mat4_create() {
-    mat4 out = malloc(sizeof(mat4));
+    mat4 out = malloc(sizeof(float) * 16);
     out[0] = 1;
     out[1] = 0;
     out[2] = 0;
